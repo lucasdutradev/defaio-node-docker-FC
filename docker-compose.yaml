@@ -11,7 +11,10 @@ services:
     networks:
       - nodechallengenet
     tty: true
-    command: "node index.js"
+    volumes:
+      - ./:/usr/src/app
+    command: >
+      sh -c "npm install && node index.js"
     depends_on:
       - db
  
@@ -39,7 +42,8 @@ services:
       - nodechallengenet
     ports:
       - 8080:80
-
+    depends_on:
+      - node
 
 networks:
   nodechallengenet:
